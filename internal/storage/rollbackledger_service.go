@@ -13,10 +13,10 @@ func NewRollbackLedgerCache() *RollbackLedgerCache {
 	return &RollbackLedgerCache{memory: make(map[string]string), durable: make(map[string]string)}
 }
 func (c *RollbackLedgerCache) Put(key, value string, fail bool) error {
-	c.memory[key] = value
 	if fail {
 		return ErrRollbackLedgerPersist
 	}
 	c.durable[key] = value
+	c.memory[key] = value
 	return nil
 }
